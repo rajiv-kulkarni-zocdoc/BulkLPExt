@@ -1,0 +1,50 @@
+{
+    "manifest_version": 3,
+    "name": "Ticket Automation Extension",
+    "version": "1.0.0",
+    "description": "Automates ticket processing for specific criteria.",
+    "permissions": [
+        "activeTab",
+        "declarativeContent",
+        "storage",
+        "tabs"
+    ],
+    "web_accessible_resources": [
+        {
+          "resources": [
+            "src/lib/jiraApi.js"
+          ],
+          "matches": [
+            "https://zocdoc.atlassian.net/*"
+          ]
+        }
+    ],
+    "action": {
+        "default_popup": "src/popup/popup.html",
+        "default_icon": {
+            "16": "src/icons/logo.png",
+            "48": "src/icons/logo.png",
+            "128": "src/icons/logo.png"
+        }
+    },
+    "background": {
+        "service_worker": "src/background/background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://zocdoc.atlassian.net/*"
+            ],
+            "js": [
+                "src/content_scripts/contentScript.js",
+                "src/popup/popup.js"
+            ],
+            "run_at": "document_end"
+        }
+    ],
+    "icons": {
+        "16": "src/icons/logo.png",
+        "48": "src/icons/logo.png",
+        "128": "src/icons/logo.png"
+    }
+}
